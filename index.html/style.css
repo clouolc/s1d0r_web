@@ -1,0 +1,599 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+
+:root{
+    --blue-dark:#1B22A6;
+    --blue:#456AFF;
+    --blue-light:#9EB3FF;
+    --pink:#FFBFEC;
+    --sky:#DEEDFF;
+    --cream:#FFFCDE;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* 1. フォントファイルの読み込み（これはそのまま残します） */
+@font-face {
+  font-family: 'AudioNugget';
+  src: url('fonts/AudioNugget.ttf') format('truetype');
+  font-display: swap;
+}
+
+/* 2. body（サイト全体）の設定 */
+body {
+
+    background:
+        radial-gradient(circle at top left,
+            rgba(255,191,236,.9),
+            transparent 35%),
+        radial-gradient(circle at bottom right,
+            rgba(158,179,255,.8),
+            transparent 35%),
+        linear-gradient(
+            135deg,
+            var(--sky),
+            var(--cream)
+        );
+
+    background-attachment: fixed;
+    padding: 40px;
+}
+
+h1 {
+  font-family: 'AudioNugget', sans-serif;
+  color:#1B22A6;
+}  
+
+/* 3. h2タグだけにフォントを適用する（新しく追加） */
+h2 {
+  font-family: 'AudioNugget', sans-serif;
+}
+
+
+.Logo {
+  width: 100%; /* 親要素の横幅いっぱいに表示 */
+  max-width: 200px; /* ただし最大でも100pxまで */
+  height: auto;
+}
+
+.gallery-scroll{
+
+    overflow:hidden;
+
+    width:100%;
+
+    margin:40px 0;
+
+    padding:20px 0;
+}
+
+.gallery-track{
+
+    display:flex;
+
+    gap:20px;
+
+    width:max-content;
+
+    animation:scrollLoop 25s linear infinite;
+}
+
+.gallery-track img{
+
+    width:300px;
+
+    height:300px;
+
+    object-fit:cover;
+
+    flex-shrink:0;
+
+    border-radius:12px;
+
+    border:2px solid white;
+
+    box-shadow:
+        4px 4px 0 var(--blue-dark),
+        0 0 15px rgba(69,106,255,.3);
+}
+
+@keyframes scrollLoop{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(calc(-50% - 10px));
+    }
+
+}
+
+/* --------------------
+   メインウィンドウ
+-------------------- */
+
+.window{
+    max-width:1400px;
+    margin:auto;
+
+    background:rgba(255,255,255,.6);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    border:2px solid white;
+    border-radius:14px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 0 0 2px var(--blue),
+        0 0 40px rgba(69,106,255,.25);
+        
+     position:relative;
+}
+
+.window-titlebar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:12px 18px;
+
+    background:linear-gradient(
+        90deg,
+        var(--blue-dark),
+        var(--blue),
+        var(--blue-light)
+    );
+
+    color:white;
+}
+
+.window-buttons{
+    display:flex;
+    gap:6px;
+}
+
+.window-buttons span{
+    width:22px;
+    height:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:linear-gradient(
+        180deg,
+        #ffffff,
+        #dfe8ff
+    );
+
+    color:var(--blue-dark);
+
+    border-top:1px solid #ffffff;
+    border-left:1px solid #ffffff;
+    border-right:1px solid #8ca3ff;
+    border-bottom:1px solid #8ca3ff;
+
+    border-radius:4px;
+
+    font-size:.75rem;
+    font-weight:bold;
+}
+
+.window-content{
+    padding:40px;
+}
+
+.window-chara{
+
+    position:absolute;
+
+    right:20px;
+    bottom:20px;
+
+    width:300px;
+
+    height:auto;
+
+    pointer-events:none;
+
+    z-index:100;
+}
+
+.section-window{
+    margin-bottom:40px;
+}
+
+/* --------------------
+   HERO
+-------------------- */
+
+.hero{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.hero h1{
+    font-size:4rem;
+
+    color:var(--blue-dark);
+
+    text-shadow:
+        3px 3px var(--pink),
+        6px 6px var(--sky);
+
+    margin-bottom:15px;
+}
+
+.hero p{
+    line-height:2;
+    color:#444;
+}
+
+/* --------------------
+   グリッド
+-------------------- */
+
+.card-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(320px,1fr));
+
+    gap:25px;
+}
+
+/* --------------------
+   カードリンク
+-------------------- */
+
+.card-link{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+}
+
+.card-link:visited{
+    color:inherit;
+}
+
+.activity-card .card-content::after{
+    background-image:url("image/activity1.webp");
+}
+
+.work-card .card-content::after{
+    background-image:url("image/work1.webp");
+}
+
+.cag-card .card-content::after{
+    background-image:url("image/cag1.webp");
+}
+
+.commission-card .card-content::after{
+    background-image:url("image/commission1.webp");
+}
+
+.chibi-card .card-content::after{
+    background-image:url("image/cc1.webp");
+}
+
+.comic-card .card-content::after{
+    background-image:url("image/comic1.webp");
+}
+
+/* --------------------
+   カード
+-------------------- */
+
+.card{
+    position:relative;
+
+    display:flex;
+    flex-direction:column;
+
+    border:2px solid var(--blue);
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    background:white;
+
+    cursor:pointer;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+    box-shadow:
+        3px 3px 0 var(--blue-dark),
+        0 0 15px rgba(69,106,255,.15);
+}
+
+.card:hover{
+    transform:
+        translateY(-8px)
+        scale(1.02);
+
+    box-shadow:
+        6px 6px 0 var(--blue-dark),
+        0 0 30px rgba(69,106,255,.45);
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 30%,
+            rgba(255,255,255,.25) 50%,
+            transparent 70%
+        );
+
+    transform:translateX(-150%);
+    transition:.8s;
+
+    pointer-events:none;
+    z-index:3;
+}
+
+.card:hover::before{
+    transform:translateX(150%);
+}
+
+.y2k-button{
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:10px 24px;
+
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #9EB3FF 0%,
+            #456AFF 50%,
+            #1B22A6 100%
+        );
+
+    color:white;
+
+    font-size:.8rem;
+    font-weight:bold;
+
+    text-shadow:
+        0 1px 2px rgba(0,0,0,.35);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.8),
+        0 0 12px rgba(69,106,255,.4),
+        0 4px 0 #14208c;
+
+    transition:.25s;
+}
+
+.card:hover .y2k-button{
+    transform:translateY(-2px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.9),
+        0 0 20px rgba(158,179,255,.8),
+        0 6px 0 #14208c;
+}
+
+.section-subtitle{
+    margin-bottom:30px;
+
+    color:var(--blue);
+
+    font-size:1rem;
+}
+/* --------------------
+   タイトルバー
+-------------------- */
+
+.card-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:8px 12px;
+
+    background:linear-gradient(
+        90deg,
+        var(--blue-dark),
+        var(--blue),
+        var(--blue-light)
+    );
+
+    color:white;
+}
+
+.card-buttons{
+    display:flex;
+    gap:4px;
+
+    pointer-events:none;
+}
+
+.card-buttons span{
+    width:18px;
+    height:18px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(
+        180deg,
+        #ffffff,
+        #dfe8ff
+    );
+
+    color:var(--blue-dark);
+
+    border-top:1px solid #ffffff;
+    border-left:1px solid #ffffff;
+
+    border-right:1px solid #8ca3ff;
+    border-bottom:1px solid #8ca3ff;
+
+    border-radius:3px;
+
+    font-size:.6rem;
+    font-weight:bold;
+}
+
+/* --------------------
+   コンテンツ
+-------------------- */
+
+.card-content{
+    position:relative;
+
+    min-height:220px;
+
+    padding:24px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255,255,255,.95),
+            rgba(222,237,255,.95)
+        );
+}
+
+.card-content::after{
+    content:"";
+
+    position:absolute;
+
+    right:8px;
+    bottom:8px;
+
+    width:140px;
+    height:140px;
+
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+
+    opacity:.95;
+
+    pointer-events:none;
+}
+
+.card-content h2,
+.card-content p{
+    position:relative;
+    z-index:2;
+}
+
+.card-content h2{
+    color:var(--blue-dark);
+    margin-bottom:10px;
+}
+
+.card-content p{
+    line-height:1.8;
+    color:#444;
+}
+
+/* --------------------
+   レスポンシブ
+-------------------- */
+
+@media (max-width:px){
+
+    .window-chara{
+
+        display:block;
+
+        position:relative;
+
+        width:120px;
+
+        margin:30px auto 0;
+
+        right:auto;
+        bottom:auto;
+    }
+
+}
+@media (max-width:768px){
+
+    body{
+        padding:15px;
+    }
+
+    .window-content{
+        padding:20px;
+    }
+
+    .hero h1{
+        font-size:2.5rem;
+    }
+
+    .Logo{
+        max-width:150px;
+    }
+
+    /* スライダー */
+
+    .gallery-track{
+        gap:12px;
+    }
+
+.gallery-track img{
+    width:250px;
+    height:250px;
+}
+
+    /* カード */
+
+    .card-grid{
+        grid-template-columns:1fr;
+    }
+
+    .card-content{
+        min-height:180px;
+        padding:18px;
+    }
+
+    .card-content h2{
+        font-size:1.2rem;
+    }
+
+    .card-content p{
+        font-size:.85rem;
+        line-height:1.6;
+    }
+
+    /* カード右下イラスト */
+
+    .card-content::after{
+        width:90px;
+        height:90px;
+
+        right:5px;
+        bottom:5px;
+
+        opacity:.8;
+    }
+
+}
+

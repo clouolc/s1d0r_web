@@ -1,0 +1,186 @@
+/* ==============================
+   gallery.css
+   全ギャラリーページ共通
+============================== */
+
+/* ---------- グリッド：横5枚固定 ---------- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* ---------- ラッパー ---------- */
+.illust-wrap {
+    position: relative;
+}
+
+.thumb-link {
+    display: block;
+    text-decoration: none;
+}
+
+/* ---------- カード ---------- */
+.gallery-card {
+    position: relative;
+    margin: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--blue);
+    box-shadow:
+        3px 3px 0 var(--blue-dark),
+        0 0 10px rgba(69,106,255,.15);
+    background: linear-gradient(135deg, var(--sky), var(--cream));
+    aspect-ratio: 1 / 1;
+    transition: transform .2s ease, box-shadow .2s ease;
+    cursor: pointer;
+}
+
+.thumb-link:hover .gallery-card {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        5px 5px 0 var(--blue-dark),
+        0 0 20px rgba(69,106,255,.4);
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* 光沢 */
+.gallery-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        130deg,
+        rgba(255,255,255,.25) 0%,
+        transparent 50%
+    );
+    pointer-events: none;
+}
+
+/* ホバー時キャプション */
+.gallery-card figcaption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 5px 8px;
+    background: linear-gradient(90deg, var(--blue-dark), var(--blue));
+    color: white;
+    font-size: .65rem;
+    font-family: 'DotGothic16', monospace;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform .2s ease;
+    z-index: 3;
+}
+.thumb-link:hover .gallery-card figcaption {
+    transform: translateY(0);
+}
+
+/* ==============================
+   モーダル（JS制御）
+============================== */
+
+/* オーバーレイ：画像以外をクリックで閉じる */
+#modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(10, 14, 80, 0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out; /* 閉じられることをカーソルで示す */
+    overflow: auto;   /* 画像が画面より大きい場合はスクロール */
+}
+
+#modal-overlay.is-open {
+    display: flex;
+}
+
+/* 画像を100%（原寸）で表示 */
+#modal-img {
+    display: block;
+    width: auto;      /* 指定なし = 実際のピクセル幅 */
+    height: auto;
+    max-width: none;  /* max-width を解除して原寸を保つ */
+    border-radius: 12px;
+    border: 3px solid var(--blue-light);
+    box-shadow:
+        0 0 0 4px var(--blue-dark),
+        0 0 60px rgba(69,106,255,.7);
+    cursor: default;  /* 画像上ではカーソルを通常に戻す */
+    margin: auto;     /* オーバーレイ内で中央寄せ */
+}
+
+/* ---------- セクションタイトル ---------- */
+.gallery-title {
+    font-family: 'AudioNugget', sans-serif;
+    font-size: 1.4rem;
+    color: var(--blue-dark);
+    text-shadow: 2px 2px var(--pink);
+    letter-spacing: .1em;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+/* ---------- ページナビ ---------- */
+.page-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 40px;
+    font-family: 'DotGothic16', monospace;
+    font-size: .85rem;
+}
+
+.page-nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 2px solid var(--blue);
+    color: var(--blue-dark);
+    text-decoration: none;
+    background: white;
+    box-shadow: 2px 2px 0 var(--blue-dark);
+    transition: transform .2s, box-shadow .2s;
+}
+.page-nav a:hover {
+    transform: translateY(-2px);
+    box-shadow: 3px 3px 0 var(--blue-dark);
+}
+.page-nav .current {
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--blue-light), var(--blue));
+    color: white;
+    font-weight: bold;
+    box-shadow: 2px 2px 0 var(--blue-dark);
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 1000px) {
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
